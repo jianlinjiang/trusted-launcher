@@ -69,6 +69,6 @@ require (
 	google.golang.org/protobuf v1.35.2 // indirect
 )
 
-replace github.com/google/go-tdx-guest => github.com/privacywill/go-tdx-guest v0.0.0-20250730062647-84450c9a27bb
+replace github.com/google/go-tdx-guest => github.com/privacywill/go-tdx-guest v0.0.0-20250730080251-682719827ec2
 
-replace github.com/google/go-tpm-tools => github.com/privacywill/go-tpm-tools v0.0.0-20250730072219-b5ff5b19b66a
+replace github.com/google/go-tpm-tools => github.com/privacywill/go-tpm-tools v0.0.0-20250730080839-663ed084da2c
