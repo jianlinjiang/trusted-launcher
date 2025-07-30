@@ -3,10 +3,9 @@ package logging
 import (
 	"context"
 	"fmt"
+	"io"
 	"log/slog"
 	"os"
-
-	"github.com/jianlinjiang/trusted-launcher/metadata"
 )
 
 const (
@@ -30,31 +29,31 @@ type Logger interface {
 type logger struct {
 	serialLogger *slog.Logger
 
-	instanceName      string
+	// instanceName      string
 	serialConsoleFile *os.File
 }
 
 // NewLogger returns a Logger with Serial Console logging configured.
 func NewLogger(ctx context.Context) (Logger, error) {
-	instanceName, err := metadata.InstanceId()
-	if err != nil {
-		return nil, err
-	}
+	// instanceName, err := metadata.InstanceId()
+	// if err != nil {
+	// 	return nil, err
+	// }
 
 	serialConsole, err := os.OpenFile(serialConsoleFile, os.O_WRONLY, 0)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open serial console for writing: %v", err)
 	}
-
-	slg := slog.New(slog.NewTextHandler(serialConsole, nil))
+	mw := io.MultiWriter(os.Stdout, serialConsole)
+	slg := slog.New(slog.NewTextHandler(mw, nil))
 	slg.Info("Serial Console logger initialized")
 
 	// This is necessary for DEBUG logs to propagate properly.
 	slog.SetDefault(slg)
 
 	return &logger{
-		serialLogger:      slg,
-		instanceName:      instanceName,
+		serialLogger: slg,
+		// instanceName:      instanceName,
 		serialConsoleFile: serialConsole,
 	}, err
 }

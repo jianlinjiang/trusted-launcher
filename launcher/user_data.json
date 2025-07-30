@@ -1,0 +1,7 @@
+{
+    "tee-image-reference": "crpi-1i78j9htau15533i.cn-beijing.personal.cr.aliyuncs.com/tee_repo/test:v0.1",
+    "tee-container-log-redirect": "serial",
+    "tee-env-APPNAME": "trusted-launcher",
+    "tee-env-APPNAMEDEBUG": "trusted-launcher-debug",
+    "tee-cmd": "[\"curl\", \"www.google.com\"]"
+}

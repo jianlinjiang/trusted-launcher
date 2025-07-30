@@ -10,6 +10,7 @@ import (
 
 	"github.com/containerd/containerd"
 	"github.com/containerd/containerd/defaults"
+	"github.com/containerd/containerd/namespaces"
 	launcher "github.com/jianlinjiang/trusted-launcher"
 	"github.com/jianlinjiang/trusted-launcher/internal/logging"
 	"github.com/jianlinjiang/trusted-launcher/launcherfile"
@@ -131,7 +132,7 @@ func startLauncher(launchSpec spec.LaunchSpec, serialConsole *os.File) error {
 	}
 	defer containerdClient.Close()
 	token := oauth2.Token{}
-	ctx := context.Background()
+	ctx := namespaces.WithNamespace(context.Background(), namespaces.Default)
 	r, err := launcher.NewRunner(ctx, containerdClient, token, launchSpec, logger, serialConsole)
 	if err != nil {
 		return err
