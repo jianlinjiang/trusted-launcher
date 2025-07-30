@@ -10,6 +10,8 @@ require (
 	github.com/google/go-tdx-guest v0.3.2-0.20241009005452-097ee70d0843
 	github.com/google/go-tpm-tools v0.4.5
 	github.com/google/go-tpm-tools/verifier v0.0.0-20250711235436-05abd54ea3ed
+	github.com/opencontainers/image-spec v1.1.0
+	github.com/opencontainers/runtime-spec v1.1.0
 	github.com/pkg/errors v0.9.1
 	golang.org/x/oauth2 v0.30.0
 )
@@ -35,8 +37,8 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
-	github.com/google/go-eventlog v0.0.2-0.20241003021507-01bb555f7cba // indirect
-	github.com/google/go-sev-guest v0.12.1 // indirect
+	github.com/google/go-eventlog v0.0.2-0.20241213203620-f921bdc3aeb0 // indirect
+	github.com/google/go-sev-guest v0.13.0 // indirect
 	github.com/google/go-tpm v0.9.0 // indirect
 	github.com/google/logger v1.1.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -48,8 +50,6 @@ require (
 	github.com/moby/sys/user v0.3.0 // indirect
 	github.com/moby/sys/userns v0.1.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
-	github.com/opencontainers/image-spec v1.1.0 // indirect
-	github.com/opencontainers/runtime-spec v1.1.0 // indirect
 	github.com/opencontainers/selinux v1.11.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	go.opencensus.io v0.24.0 // indirect
@@ -68,3 +68,7 @@ require (
 	google.golang.org/grpc v1.67.1 // indirect
 	google.golang.org/protobuf v1.35.2 // indirect
 )
+
+replace github.com/google/go-tdx-guest => github.com/privacywill/go-tdx-guest v0.0.0-20250730062647-84450c9a27bb
+
+replace github.com/google/go-tpm-tools => github.com/privacywill/go-tpm-tools v0.0.0-20250730072219-b5ff5b19b66a
