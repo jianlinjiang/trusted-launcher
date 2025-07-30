@@ -1,0 +1,6 @@
+{
+    "tee-image-reference": "ubuntu:22.04",
+    "tee-container-log-redirect": "serial",
+    "tee-env-APPNAME": "trusted-launcher",
+    "tee-cmd": "[\"ls\", \"-l\", \"/home\"]"
+}
