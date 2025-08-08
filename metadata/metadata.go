@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/pkg/errors"
@@ -24,13 +23,16 @@ func init() {
 }
 
 func ReadUserData() (map[string]string, error) {
-	userData, err := os.ReadFile(userDataFile)
+	resp, err := metaDataClient.Get("http://34.124.242.198:8882/api/config")
 	if err != nil {
 		return nil, err
 	}
-
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
 	var res map[string]string
-	err = json.Unmarshal(userData, &res)
+	err = json.Unmarshal(data, &res)
 	return res, err
 }
 

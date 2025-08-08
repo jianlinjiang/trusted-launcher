@@ -145,9 +145,9 @@ func getExitCode(isHardened bool, err error) int {
 	exitCode := 0
 
 	// if in a debug image, will always hold
-	if !isHardened {
-		return holdRC
-	}
+	// if !isHardened {
+	// 	return holdRC
+	// }
 
 	if err != nil {
 		// switch err.(type) {
