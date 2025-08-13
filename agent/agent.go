@@ -14,7 +14,6 @@ import (
 	"github.com/google/go-tpm-tools/cel"
 	"github.com/google/go-tpm-tools/verifier"
 	"github.com/jianlinjiang/trusted-launcher/internal/logging"
-	"github.com/jianlinjiang/trusted-launcher/spec"
 )
 
 type AttestationAgent interface {
@@ -35,14 +34,12 @@ type attestRoot interface {
 type agent struct {
 	measuredRots []attestRoot
 	avRot        attestRoot
-	launchSpec   spec.LaunchSpec
 	logger       logging.Logger
 }
 
-func CreateAttestationAgent(launchSpec spec.LaunchSpec, logger logging.Logger) (AttestationAgent, error) {
+func CreateAttestationAgent(logger logging.Logger) (AttestationAgent, error) {
 	attestAgent := &agent{
-		launchSpec: launchSpec,
-		logger:     logger,
+		logger: logger,
 	}
 	// check if is a TDX machine
 	qp, err := tg.GetQuoteProvider()
@@ -136,10 +133,12 @@ func (t *tdxAttestRoot) Attest(nonce [64]byte) (any, error) {
 	if err != nil {
 		return nil, err
 	}
+	ccelData = bytes.TrimRight(ccelData, "\xff")
 	ccelTable, err := os.ReadFile("/sys/firmware/acpi/tables/CCEL")
 	if err != nil {
 		return nil, err
 	}
+	ccelTable = bytes.TrimRight(ccelTable, "\xff")
 
 	return &verifier.TDCCELAttestation{
 		CcelAcpiTable: ccelTable,

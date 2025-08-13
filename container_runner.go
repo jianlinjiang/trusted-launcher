@@ -166,7 +166,7 @@ func NewRunner(ctx context.Context, cdClient *containerd.Client, token oauth2.To
 				len(containerSpec.Process.Args), len(launchSpec.Cmd))
 	}
 
-	attestAgent, err := agent.CreateAttestationAgent(launchSpec, logger)
+	attestAgent, err := agent.CreateAttestationAgent(logger)
 
 	if err != nil {
 		return nil, err
